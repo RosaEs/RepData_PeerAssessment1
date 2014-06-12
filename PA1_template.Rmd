@@ -4,13 +4,69 @@
 ## Loading and preprocessing the data
 
 
+```r
+data <- read.csv(file = "activity.csv", colClasses = c("integer", "Date", "integer"))
+attach(data)
+summary(data)
+```
 
 ## What is mean total number of steps taken per day?
 
+```r
+stepsPerDay <- aggregate(steps ~ date, data, sum, na.rm = TRUE)$steps
+hist(stepsPerDay)
+```
+
+![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2.png) 
+
+
+The Mean number of steps per day is:
+
+```r
+mean(stepsPerDay)
+```
+
+```
+## [1] 10766
+```
+
+
+The Median number of steps per day is:
+
+```r
+median(stepsPerDay)
+```
+
+```
+## [1] 10765
+```
 
 
 ## What is the average daily activity pattern?
+The daily activity was recorded as interval of 5 minutes
+1. Plot
+```r
+stepsByInterval <- aggregate(steps ~ interval, data, mean)$steps
+plot(stepsByInterval, type = "l")
+```
 
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5.png) 
+
+2. The highest mean steps and the interval with the maximum number of steps
+
+```r
+maxInterval = which.max(stepsByInterval)
+maxInterval
+interval[maxInterval]
+```
+
+```
+## [1] 104
+```
+
+```
+## [1] 835
+```
 
 
 ## Imputing missing values
