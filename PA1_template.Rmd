@@ -71,6 +71,64 @@ stepsByInterval$steps[maxInterval]
 
 ## Imputing missing values
 
+Number of missing rows
+
+```r
+missingRows<-sum(is.na(steps))
+missingRows
+```
+
+```
+## [1] 2304
+```
+
+Strategy for filling in all of the missing values:
+Create new dataset with the missing values filled in with the average number of steps from the corresponding interval. 
+
+```r
+newdata<-data
+
+for (i in 1:length(newdata$interval)) {
+    if(is.na(newdata$steps[i])){
+    newdata$steps[i] <- stepsByInterval[which(stepsByInterval$interval == newdata$interval[i]), ]$steps
+    }
+    else
+    newdata$steps[i] <-newdata$steps[i]
+}
+```
+Histogram of total number of steps per day with missing data filled in
+
+```r
+NewStepsPerDay <- aggregate(steps ~ date, newdata, sum)$steps
+hist(NewStepsPerDay)
+```
+
+![plot of chunk unnamed-chunk-10](figure/unnamed-chunk-10.png) 
+
+
+New mean with missing data filled in
+
+```r
+mean(NewStepsPerDay)
+```
+
+```
+## [1] 10766.19
+```
+
+
+New median with missing data filled in
+
+```r
+median(NewStepsPerDay)
+```
+
+```
+## [1] 10766.19
+```
+
+The values are almost the same with the data filled in.
+
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
