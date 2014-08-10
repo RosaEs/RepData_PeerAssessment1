@@ -24,25 +24,14 @@ hist(stepsPerDay,xlab ="Steps per day")
 2.Calculate and report the mean and median total number of steps taken per day
 
 The Mean number of steps per day is:
-
-```r
+```{r}
 mean(stepsPerDay)
 ```
 
-```
-## [1] 10766
-```
-
-
 The Median number of steps per day is:
-
-```r
+```{r}
 median(stepsPerDay)
 ```
-```
-## [1] 10765
-```
-
 
 ## What is the average daily activity pattern?
 1.Time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
@@ -53,34 +42,20 @@ plot(stepsByInterval$steps, type = "l",xlab ="Interval", ylab="Average daily ste
 
 2.The highest mean steps and the interval with the maximum number of steps
 
-```r
+```{r}
 maxInterval = which.max(stepsByInterval$steps)
 maxInterval
 stepsByInterval$interval[maxInterval]
 stepsByInterval$steps[maxInterval]
 ```
 
-```
-## [1] 104
-```
-
-```
-## The interval: 835
-```
-```
-## highest steps on average: 206.1698
-```
-
 ## Imputing missing values
 
 1.Number of missing rows
 
-```r
+```{r}
 missingRows<-sum(is.na(steps))
 missingRows
-```
-```
-## [1] 2304
 ```
 
 2.Strategy for filling in all of the missing values  
@@ -105,21 +80,13 @@ hist(NewStepsPerDay)
 ```
 
 New mean with missing data filled in
-
-```r
+```{r}
 mean(NewStepsPerDay)
-```
-```
-## [1] 10766.19
 ```
 
 New median with missing data filled in
-
-```r
+```{r}
 median(NewStepsPerDay)
-```
-```
-## [1] 10766.19
 ```
 
 The values are slightly higher with the data filled in.
